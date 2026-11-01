@@ -8,8 +8,8 @@ A Spicetify extension that takes the Canvas of the song you're playing beyond th
 
 | Page | Vitral theme | Other themes |
 |:---|:---|:---|
-| Home | In the oval next to the greeting | Not shown |
-| Album or playlist the song belongs to | In the oval over the large photo | Behind the page header |
+| Home | Full width behind the greeting | Not shown |
+| Album or playlist the song belongs to | Full width in place of the large photo | Behind the page header |
 
 It works with any theme, and fits in fully with [Vitral](https://github.com/SrPictus/vitral). Vitral doesn't need this extension either.
 

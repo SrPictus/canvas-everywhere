@@ -22,29 +22,34 @@
       z-index: -1;
       transition: opacity 0.8s ease;
     }
+    /* A todo lo ancho, desvaneciéndose hacia la página, como las fotos grandes de artista */
     .vt-home-hero > .ce-video,
     .vt-hero > .ce-video {
-      -webkit-mask-image: radial-gradient(closest-side, #000 50%, rgba(0, 0, 0, 0.5) 78%, transparent);
+      top: 0;
+      left: 0;
+      width: 100%;
+      object-position: center 12%;
+      /* También hacia el título, para que siga leyéndose */
+      -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%), linear-gradient(90deg, rgba(0, 0, 0, 0.12) 15%, #000 65%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
     }
     .vt-home-hero > .ce-video {
-      top: 0;
-      right: 2%;
-      width: 440px;
-      height: 440px;
+      top: -4px;
+      height: 470px;
     }
-    .vt-home-hero > .ce-video.is-on { opacity: 0.85; }
     .vt-hero > .ce-video {
-      top: 0;
-      right: 3%;
       height: 100%;
-      aspect-ratio: 1;
     }
-    .vt-hero > .ce-video.is-on { opacity: 0.82; }
-    /* Mientras suena el video, la foto de debajo se aparta para no verse las dos a la vez */
+    .vt-home-hero > .ce-video.is-on,
+    .vt-hero > .ce-video.is-on { opacity: 0.8; }
+    /* Mientras suena el video, la foto y el título gigante de fondo se apartan */
     .vt-home-cover,
-    .vt-hero-img { transition: opacity 0.8s ease; }
+    .vt-hero-img,
+    .vt-hero-ghost { transition: opacity 0.8s ease; }
     .vt-home-hero:has(> .ce-video.is-on) > .vt-home-cover,
-    .vt-hero:has(> .ce-video.is-on) > .vt-hero-img { opacity: 0 !important; }
+    .vt-hero:has(> .ce-video.is-on) > .vt-hero-img,
+    .vt-hero:has(> .ce-video.is-on) > .vt-hero-ghost { opacity: 0 !important; }
 
     /* Otros temas: detrás de la cabecera, desvanecido hacia el título */
     .ce-host {
