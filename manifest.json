@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Canvas Everywhere",
+    "description": "Shows the Canvas of the song you're playing on your home page and at the top of its album or playlist. Works with any theme and fits in fully with Vitral.",
+    "preview": "preview.png",
+    "main": "canvas-everywhere.js",
+    "readme": "README.md",
+    "authors": [{ "name": "SrPictus", "url": "https://github.com/SrPictus" }],
+    "tags": ["canvas", "video", "home", "vitral"]
+  }
+]
