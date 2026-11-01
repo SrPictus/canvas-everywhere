@@ -112,8 +112,18 @@
       isolation: isolate;
       height: clamp(200px, 32vh, 320px);
       margin-bottom: 16px;
-      overflow: hidden;
-      border-radius: 12px;
+    }
+    /* Empieza por detrás de los filtros de arriba y se funde ahí, para que no quede ningún borde recto */
+    .ce-banner > .ce-stage {
+      top: -68px;
+      height: calc(100% + 68px);
+    }
+    .ce-banner .ce-video {
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 34%, #000 62%, transparent), linear-gradient(90deg, transparent, #000 45%);
+    }
+    #main-view:has(.ce-banner) .jTuahgNncRCCfJfiJwQi,
+    #main-view:has(.ce-banner) .jTuahgNncRCCfJfiJwQi > * {
+      background: none !important;
     }
     .ce-banner .ce-caption { bottom: 14%; }
 
