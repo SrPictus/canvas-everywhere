@@ -6,12 +6,10 @@ A Spicetify extension that takes the Canvas of the song you're playing beyond th
 
 ## Where it shows
 
-| Page | Vitral theme | Other themes |
-|:---|:---|:---|
-| Home | Full width behind the greeting | Not shown |
-| Album or playlist the song belongs to | Full width in place of the large photo | Behind the page header |
+- **Home:** a band at the top of the page, only while a Canvas is playing
+- **Album or playlist the song belongs to:** on the right of the page header
 
-It works with any theme, and fits in fully with [Vitral](https://github.com/SrPictus/vitral). Vitral doesn't need this extension either.
+The song's name and artist appear over the video, in your theme's own title font. It works with any theme, and with [Vitral](https://github.com/SrPictus/vitral) it takes the place of the theme's large photo. Vitral doesn't need this extension either.
 
 ## Requirements
 
@@ -39,7 +37,7 @@ spicetify apply
 
 - Only the song that's playing, because Spotify desktop can't play Canvas files directly. The extension shares the video Spotify is already showing, so it can't preview other songs on a page.
 - Songs without a Canvas keep the normal photo.
-- Tested on Windows with Vitral and with no theme. A Spotify update can break it.
+- A Spotify update can break it.
 - It turns itself off when the window is minimized, or when your system asks for reduced motion.
 
 ## License
