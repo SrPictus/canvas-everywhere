@@ -33,9 +33,15 @@
       height: 100%;
       object-fit: cover;
       object-position: center 14%;
-      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent), linear-gradient(90deg, transparent, #000 45%);
+      /* También hacia arriba: sin bordes rectos, también donde la cabecera no llega al borde del panel */
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 55%, transparent), linear-gradient(90deg, transparent, #000 45%);
       -webkit-mask-composite: source-in;
       mask-composite: intersect;
+    }
+    /* En Vitral el video llega al borde del panel: arriba no hace falta fundirlo */
+    .vt-home-hero .ce-video,
+    .vt-hero .ce-video {
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent), linear-gradient(90deg, transparent, #000 45%);
     }
 
     /* Sobre un video de cualquier color: siempre claro y con sombra. La letra es la de títulos del tema */
@@ -94,8 +100,11 @@
       position: relative;
       isolation: isolate;
     }
-    .ce-host > .ce-stage { width: 70%; }
-    .ce-host .ce-caption { bottom: 12%; }
+    /* Spotify pinta su color en una capa propia: el video va encima de ella y debajo del título */
+    .ce-host > .ce-stage { width: 70%; z-index: 0; }
+    .ce-host > .main-entityHeader-contentWrapper { position: relative; z-index: 1; }
+    /* Arriba, porque los títulos largos de la cabecera llegan hasta aquí abajo */
+    .ce-host .ce-caption { top: 12%; bottom: auto; }
 
     /* Inicio con cualquier tema: una franja arriba, que solo existe mientras hay Canvas */
     .ce-banner {
@@ -105,10 +114,6 @@
       margin-bottom: 16px;
       overflow: hidden;
       border-radius: 12px;
-    }
-    .ce-banner > .ce-stage { width: 100%; }
-    .ce-banner .ce-video {
-      -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent), linear-gradient(90deg, transparent 10%, #000 60%);
     }
     .ce-banner .ce-caption { bottom: 14%; }
 

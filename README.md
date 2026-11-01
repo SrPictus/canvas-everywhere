@@ -2,7 +2,15 @@
 
 A Spicetify extension that takes the Canvas of the song you're playing beyond the side panel: to your home page and to the top of its album or playlist.
 
-<img src="https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/preview.png" alt="A Canvas playing on the home page with the Vitral theme" width="640">
+![A Canvas playing at the top of a playlist](https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/screenshots/playlist.png)
+
+| Home | Album |
+|:---:|:---:|
+| ![A Canvas on the home page](https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/screenshots/home.png) | ![A Canvas on an album page](https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/screenshots/album.png) |
+
+With the Vitral theme:
+
+![A Canvas on an album page with the Vitral theme](https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/screenshots/album-vitral.png)
 
 ## Where it shows
 
@@ -37,6 +45,7 @@ spicetify apply
 
 - Only the song that's playing, because Spotify desktop can't play Canvas files directly. The extension shares the video Spotify is already showing, so it can't preview other songs on a page.
 - Songs without a Canvas keep the normal photo.
+- Sharpness depends on the song and on the resolution Spotify delivers at that moment, which can change while it plays.
 - A Spotify update can break it.
 - It turns itself off when the window is minimized, or when your system asks for reduced motion.
 
