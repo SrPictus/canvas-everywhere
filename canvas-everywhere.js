@@ -32,7 +32,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 14%;
+      object-position: center;
       /* También hacia arriba: sin bordes rectos, también donde la cabecera no llega al borde del panel */
       -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 55%, transparent), linear-gradient(90deg, transparent, #000 45%);
       -webkit-mask-composite: source-in;
@@ -138,6 +138,12 @@
     .vt-hero:has(> .ce-stage.is-on) > .vt-hero-img,
     .vt-hero:has(> .ce-stage.is-on) > .vt-hero-ghost { opacity: 0 !important; }
     .vt-hero > .ce-stage { z-index: 0; }
+    /* Mientras suena el video, el título crece hasta donde empieza y la página queda dividida en dos */
+    .vt-has-hero #main-view:has(.vt-hero > .ce-stage.is-on) .main-entityHeader-title h1 {
+      max-width: 43% !important;
+      font-size: clamp(44px, 5.6vw, 96px) !important;
+      overflow-wrap: break-word;
+    }
   `;
   document.head.append(style);
 
