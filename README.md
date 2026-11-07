@@ -26,15 +26,46 @@ The song's name and artist appear over the video, in your theme's own title font
 
 ## Install
 
-From the Spicetify Marketplace: search for **Canvas Everywhere** in the Extensions tab and install it.
+### Marketplace (recommended)
 
-Or by hand:
+Open the **Marketplace** in Spotify, go to the **Extensions** tab, search for **Canvas Everywhere** and click **Install**. It updates on its own.
 
-1. Copy `canvas-everywhere.js` to the Spicetify `Extensions` folder (`%appdata%\spicetify\Extensions` on Windows, `~/.config/spicetify/Extensions` on macOS and Linux).
-2. Run:
+### Manual, on Windows
+
+In PowerShell:
+
+```powershell
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/canvas-everywhere.js" -OutFile "$env:APPDATA\spicetify\Extensions\canvas-everywhere.js"
+```
+
+```powershell
+spicetify config extensions canvas-everywhere.js
+```
+
+```powershell
+spicetify apply
+```
+
+### Manual, on macOS and Linux
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/SrPictus/canvas-everywhere/main/canvas-everywhere.js -o ~/.config/spicetify/Extensions/canvas-everywhere.js
+```
 
 ```bash
 spicetify config extensions canvas-everywhere.js
+```
+
+```bash
+spicetify apply
+```
+
+### Uninstall
+
+From the Marketplace, click **Uninstall** on Canvas Everywhere. If you installed it by hand:
+
+```bash
+spicetify config extensions canvas-everywhere.js-
 ```
 
 ```bash
