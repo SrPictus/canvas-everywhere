@@ -103,8 +103,8 @@
     /* Spotify pinta su color en una capa propia: el video va encima de ella y debajo del título */
     .ce-host > .ce-stage { width: 70%; z-index: 0; }
     .ce-host > .main-entityHeader-contentWrapper { position: relative; z-index: 1; }
-    /* Arriba, porque los títulos largos de la cabecera llegan hasta aquí abajo */
-    .ce-host .ce-caption { top: 12%; bottom: auto; }
+    /* La cabecera ya tiene su título, y el nombre de la canción está en el reproductor */
+    .ce-host .ce-caption { display: none; }
 
     /* Inicio con cualquier tema: una franja arriba, que solo existe mientras hay Canvas */
     .ce-banner {
@@ -138,10 +138,9 @@
     .vt-hero:has(> .ce-stage.is-on) > .vt-hero-img,
     .vt-hero:has(> .ce-stage.is-on) > .vt-hero-ghost { opacity: 0 !important; }
     .vt-hero > .ce-stage { z-index: 0; }
-    /* Mientras suena el video, el título crece hasta donde empieza y la página queda dividida en dos */
+    /* Mientras suena el video, el título ocupa su mitad y la página queda dividida en dos. El tamaño lo pone fitTitle */
     .vt-has-hero #main-view:has(.vt-hero > .ce-stage.is-on) .main-entityHeader-title h1 {
       max-width: 43% !important;
-      font-size: clamp(44px, 5.6vw, 96px) !important;
       overflow-wrap: break-word;
     }
   `;
@@ -259,11 +258,63 @@
     return vitral ? document.querySelector("#main-view .vt-hero:not(.vt-hero-wide)") : header;
   }
 
+  // Con Vitral el título crece hasta llenar su mitad, pero nunca pasa de dos líneas: los títulos largos
+  // se quedan más pequeños en vez de montarse sobre los datos y los botones de debajo
+  const TITLE_LINES = 2;
+  const TITLE_MAX_PX = 150;
+  let fitKey = null;
+  let fitted = null;
+
+  // Spotify pone su propio tamaño en línea en el título: se guarda para devolvérselo
+  function restoreTitle() {
+    if (!fitted) return;
+    fitted.el.style.removeProperty("font-size");
+    if (fitted.inline) fitted.el.style.fontSize = fitted.inline;
+    fitted = null;
+  }
+
+  function fitTitle() {
+    const h1 = document.querySelector("#main-view .main-entityHeader-title h1");
+    const on = !!(h1 && page.stage.classList.contains("is-on") && page.stage.closest(".vt-hero"));
+    if (fitted && fitted.el !== h1) fitted = null;
+    if (!on) {
+      restoreTitle();
+      fitKey = null;
+      return;
+    }
+    const main = document.querySelector("#main-view");
+    const key = `${h1.textContent}|${main.clientWidth}`;
+    if (key === fitKey) return;
+    fitKey = key;
+    restoreTitle();
+    fitted = { el: h1, inline: h1.style.fontSize };
+    const base = parseFloat(getComputedStyle(h1).fontSize);
+    const fits = (size) => {
+      h1.style.setProperty("font-size", `${size}px`, "important");
+      const line = parseFloat(getComputedStyle(h1).lineHeight) || size * 1.1;
+      return h1.scrollHeight <= line * TITLE_LINES + 4 && h1.scrollWidth <= h1.clientWidth + 2;
+    };
+    let low = base;
+    let high = Math.max(base, Math.min(TITLE_MAX_PX, main.clientWidth * 0.08));
+    if (!fits(low)) {
+      // Ni a su tamaño normal cabe en dos líneas: se deja como lo pone el tema
+      restoreTitle();
+      return;
+    }
+    for (let i = 0; i < 7 && high - low > 1; i++) {
+      const mid = (low + high) / 2;
+      if (fits(mid)) low = mid;
+      else high = mid;
+    }
+    h1.style.setProperty("font-size", `${Math.floor(low)}px`, "important");
+  }
+
   function sync() {
     const path = Spicetify.Platform.History.location.pathname;
     const stream = findCanvasStream();
     show(home, homeHost(path, stream), stream);
     show(page, pageHost(path), stream);
+    fitTitle();
   }
 
   Spicetify.Platform.History.listen(sync);
