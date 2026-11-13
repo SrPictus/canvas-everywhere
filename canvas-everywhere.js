@@ -121,8 +121,8 @@
     .ce-banner .ce-video {
       -webkit-mask-image: linear-gradient(180deg, transparent, #000 34%, #000 62%, transparent), linear-gradient(90deg, transparent, #000 45%);
     }
-    #main-view:has(.ce-banner) .jTuahgNncRCCfJfiJwQi,
-    #main-view:has(.ce-banner) .jTuahgNncRCCfJfiJwQi > * {
+    #main-view:has(.ce-banner) :is(.jTuahgNncRCCfJfiJwQi, .main-home-filterChipsContainer),
+    #main-view:has(.ce-banner) :is(.jTuahgNncRCCfJfiJwQi, .main-home-filterChipsContainer) > * {
       background: none !important;
     }
     .ce-banner .ce-caption { bottom: 14%; }
